@@ -1,0 +1,162 @@
+/* one text style for everything */
+* { font: 16px Arial, sans-serif; box-sizing: border-box; }
+
+body { margin: 0; }
+a { color: black; }
+
+/* ---------- Layout ---------- */
+.topbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 20px;
+    padding: 10px 20px;
+    border-bottom: 2px solid black;
+}
+.topbar a { margin-right: 6px; padding: 3px 6px; border: 1px solid white; white-space: nowrap; }
+.topbar a.current { border-color: black; }
+.topbar nav { flex: 1; }
+.logout a { margin: 0; }
+.logout { display: flex; align-items: center; gap: 10px; margin: 0; }
+
+.container { max-width: 1000px; margin: 20px auto; padding: 0 15px; }
+.footer { text-align: center; padding: 20px; }
+
+.card {
+    border: 1px solid black;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.card.narrow { max-width: 420px; margin-left: auto; margin-right: auto; }
+
+h1, h2 { margin-top: 0; }
+
+.page-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+.card .page-head { margin-bottom: 0; }
+
+/* ---------- Dashboard boxes ---------- */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+.stat { border: 1px solid black; padding: 15px; text-align: center; }
+.stat strong { display: block; margin-bottom: 4px; }
+
+/* ---------- Forms ---------- */
+form { margin: 0; }
+.field { margin-bottom: 14px; }
+label { display: block; margin-bottom: 4px; }
+
+input, select, textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid black;
+    background: white;
+}
+input[type="checkbox"] { width: auto; }
+input[readonly] { border-style: dashed; }
+.invalid { border-width: 2px; }
+
+.error {
+    display: block;
+    margin-top: 4px;
+    padding: 4px;
+    border: 1px dashed black;
+}
+.error:empty { display: none; }
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 20px;
+}
+
+.filters {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr auto auto;
+    gap: 10px;
+    align-items: end;
+}
+.filters .field { margin: 0; }
+.filters-p { grid-template-columns: 2fr 1fr 1fr 1fr auto auto; }
+.check { display: flex; align-items: center; gap: 6px; margin: 0; }
+.grow { flex: 1; }
+.inline-form { display: flex; flex-wrap: wrap; gap: 10px; align-items: end; }
+.inline-form .field { margin: 0; }
+.inline-form .grow { min-width: 160px; }
+.filters-wide { grid-template-columns: repeat(5, 1fr) auto; }
+.filters-6 { grid-template-columns: repeat(5, 1fr) auto; }
+.actions-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
+.actions-row form { display: inline; }
+dl { display: grid; grid-template-columns: max-content 1fr; gap: 6px 20px; margin: 0 0 15px; }
+dd { margin: 0; }
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.tabs a { padding: 6px 12px; border: 1px solid black; text-decoration: none; }
+.tabs a.current { border-width: 3px; }
+.num { text-align: right; }
+tr.total td { border-top: 3px solid black; }
+td select, td input { min-width: 70px; }
+
+/* ---------- Buttons ---------- */
+.btn, button {
+    display: inline-block;
+    padding: 8px 14px;
+    border: 2px solid black;
+    background: white;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.btn.small { padding: 3px 8px; }
+
+/* ---------- Messages ---------- */
+.alert { padding: 10px 15px; margin-bottom: 20px; border: 2px solid black; }
+.alert.error { margin: 0 0 20px; border: 2px dashed black; }
+
+/* ---------- Tables ---------- */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 8px 10px; border: 1px solid black; text-align: left; }
+th a { text-decoration: none; }
+td.actions { white-space: nowrap; }
+td.actions.wrap { white-space: normal; }
+td.actions form { display: inline-block; margin: 2px 4px 2px 0; }
+td.actions select { width: auto; padding: 4px; }
+.empty { text-align: center; }
+
+.pager { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 15px; }
+.pager a, .pager span { padding: 5px 10px; border: 1px solid black; text-decoration: none; }
+.pager .current { border-width: 3px; }
+
+/* ---------- Tablet and mobile ---------- */
+@media (max-width: 800px) {
+    .filters, .filters-wide, .filters-6, .filters-p { grid-template-columns: 1fr 1fr; }
+    .hide-sm { display: none; }
+}
+
+@media (max-width: 600px) {
+    .form-grid, .filters, .filters-wide, .filters-6, .filters-p { grid-template-columns: 1fr; }
+    dl { grid-template-columns: 1fr; }
+    .topbar nav a { display: inline-block; margin: 4px 12px 4px 0; }
+    .logout { width: 100%; justify-content: space-between; }
+    .card { padding: 15px; }
+    .hide-xs { display: none; }
+    th, td { padding: 6px; }
+    td.actions { white-space: normal; }
+    td.actions .btn, td.actions button { padding: 3px 6px; }
+}
+
+/* ---------- Printing (invoices and purchase orders) ---------- */
+@media print {
+    .topbar, .footer, .no-print, .alert { display: none; }
+    .card { border: 0; padding: 0; }
+}
