@@ -40,3 +40,6 @@ Prepared statements everywhere, `htmlspecialchars` on all output, CSRF token on 
 - Product quantity only changes through a stock movement (never by editing the product), so history always adds up.
 - Stock changes run in database transactions with row locks, so two users cannot sell the same stock.
 - Products, customers and suppliers used by orders cannot be deleted. Products are archived instead.
+
+## Acknowledgement
+Built with the help of an AI tool (Claude by Anthropic).
