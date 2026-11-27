@@ -5,21 +5,22 @@ body { margin: 0; }
 a { color: black; }
 
 /* ---------- Layout ---------- */
-.topbar {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px 20px;
-    padding: 10px 20px;
-    border-bottom: 2px solid black;
-}
-.topbar a { margin-right: 6px; padding: 3px 6px; border: 1px solid white; white-space: nowrap; }
-.topbar a.current { border-color: black; }
-.topbar nav { flex: 1; }
-.logout a { margin: 0; }
-.logout { display: flex; align-items: center; gap: 10px; margin: 0; }
+/* logged in: sidebar on the left, page on the right */
+.app { display: flex; min-height: 100vh; }
+.sidebar { width: 220px; flex-shrink: 0; padding: 20px 15px; border-right: 2px solid black; }
+.side { position: sticky; top: 20px; display: flex; flex-direction: column; gap: 20px; }
+.brand { padding-bottom: 12px; border-bottom: 2px solid black; }
+.sidebar nav { display: flex; flex-direction: column; gap: 6px; }
+.sidebar nav a { padding: 8px 10px; border: 2px solid white; text-decoration: none; }
+.sidebar nav a.current { border-color: black; }
+.account { display: flex; flex-direction: column; gap: 8px; padding-top: 12px; border-top: 2px solid black; word-break: break-word; }
 
-.container { max-width: 1000px; margin: 20px auto; padding: 0 15px; }
+/* login and register: no sidebar, only the name on top */
+.topbar { padding: 10px 20px; border-bottom: 2px solid black; }
+.topbar .brand { padding: 0; border: 0; }
+
+.content { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.container { width: 100%; max-width: 1000px; margin: 20px auto; padding: 0 15px; flex: 1; }
 .footer { text-align: center; padding: 20px; }
 
 .card {
@@ -141,13 +142,19 @@ td.actions select { width: auto; padding: 4px; }
 @media (max-width: 800px) {
     .filters, .filters-wide, .filters-6, .filters-p { grid-template-columns: 1fr 1fr; }
     .hide-sm { display: none; }
+
+    /* sidebar becomes a bar on top */
+    .app { flex-direction: column; min-height: 0; }
+    .sidebar { width: 100%; padding: 10px 15px; border-right: 0; border-bottom: 2px solid black; }
+    .side { position: static; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+    .brand { padding: 0; border: 0; }
+    .sidebar nav { flex-direction: row; flex-wrap: wrap; gap: 4px; flex: 1 1 100%; order: 3; }
+    .account { flex-direction: row; align-items: center; gap: 10px; padding: 0; border: 0; margin-left: auto; }
 }
 
 @media (max-width: 600px) {
     .form-grid, .filters, .filters-wide, .filters-6, .filters-p { grid-template-columns: 1fr; }
     dl { grid-template-columns: 1fr; }
-    .topbar nav a { display: inline-block; margin: 4px 12px 4px 0; }
-    .logout { width: 100%; justify-content: space-between; }
     .card { padding: 15px; }
     .hide-xs { display: none; }
     th, td { padding: 6px; }
@@ -157,6 +164,6 @@ td.actions select { width: auto; padding: 4px; }
 
 /* ---------- Printing (invoices and purchase orders) ---------- */
 @media print {
-    .topbar, .footer, .no-print, .alert { display: none; }
+    .sidebar, .topbar, .footer, .no-print, .alert { display: none; }
     .card { border: 0; padding: 0; }
 }

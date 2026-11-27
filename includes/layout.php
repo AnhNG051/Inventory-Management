@@ -19,31 +19,38 @@ function page_start($title, $public = false) {
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
-<header class="topbar">
-    <span class="brand">Inventory System</span>
-    <?php if (!$public): ?>
-        <nav>
-            <?php
-            nav_link("dashboard.php", "Dashboard");
-            nav_link("products.php", "Products");
-            nav_link("contacts.php", "Contacts");
-            nav_link("purchase_orders.php", "Purchases");
-            nav_link("sales_orders.php", "Sales");
-            nav_link("stock.php", "Stock");
-            nav_link("reports.php", "Reports");
-            if (is_admin()) {
-                nav_link("admin.php", "Admin");
-            }
-            ?>
-        </nav>
-        <form method="post" action="login.php" class="logout">
-            <?php csrf_field(); ?>
-            <input type="hidden" name="action" value="logout">
-            <a href="profile.php"><?= h($_SESSION["username"]) ?> (<?= h($_SESSION["role"]) ?>)</a>
-            <button type="submit" class="btn small">Logout</button>
-        </form>
-    <?php endif; ?>
-</header>
+<div class="app">
+<?php if (!$public): ?>
+    <aside class="sidebar">
+        <div class="side">
+            <span class="brand">Inventory System</span>
+            <nav>
+                <?php
+                nav_link("dashboard.php", "Dashboard");
+                nav_link("products.php", "Products");
+                nav_link("contacts.php", "Contacts");
+                nav_link("purchase_orders.php", "Purchases");
+                nav_link("sales_orders.php", "Sales");
+                nav_link("stock.php", "Stock");
+                nav_link("reports.php", "Reports");
+                if (is_admin()) {
+                    nav_link("admin.php", "Admin");
+                }
+                ?>
+            </nav>
+            <form method="post" action="login.php" class="account">
+                <?php csrf_field(); ?>
+                <input type="hidden" name="action" value="logout">
+                <a href="profile.php"><?= h($_SESSION["username"]) ?> (<?= h($_SESSION["role"]) ?>)</a>
+                <button type="submit" class="btn small">Logout</button>
+            </form>
+        </div>
+    </aside>
+<?php endif; ?>
+<div class="content">
+<?php if ($public): ?>
+    <header class="topbar"><span class="brand">Inventory System</span></header>
+<?php endif; ?>
 <main class="container">
     <?php show_flash(); ?>
 <?php
@@ -53,6 +60,8 @@ function page_end() {
 ?>
 </main>
 <footer class="footer">INFO 3135 Course Project - Inventory Management System</footer>
+</div>
+</div>
 <script src="../assets/js/app.js"></script>
 </body>
 </html>
